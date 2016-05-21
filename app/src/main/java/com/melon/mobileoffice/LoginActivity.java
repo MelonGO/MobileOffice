@@ -1,5 +1,6 @@
 package com.melon.mobileoffice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,18 +13,22 @@ import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Button login_btn;
     private EditText user_name;
     private EditText user_password;
 
-    final FinalDb db = FinalDb.create(this);
+    private FinalDb db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        db = FinalDb.create(this);
 
         user_name = (EditText) findViewById(R.id.name_edit);
         user_password = (EditText) findViewById(R.id.password_edit);
@@ -53,9 +58,34 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Object o) {
                 super.onSuccess(o);
-                if (o != null) {
-                    User user = (User) o;
+                String message = o.toString();
+                if (!message.equals("error")) {
+                    String userInfo[] = message.split(";");
+                    int userid = Integer.parseInt(userInfo[0]);
+                    String username = userInfo[1];
+                    String userpassword = userInfo[2];
+                    String gender = userInfo[3];
+                    int age = Integer.parseInt(userInfo[4]);
+                    String address = userInfo[5];
+
+                    User user = new User();
+                    user.setUserid(userid);
+                    user.setUsername(username);
+                    user.setUserpassword(userpassword);
+                    user.setGender(gender);
+                    user.setAge(age);
+                    user.setAddress(address);
+
+                    List<User> userList = db.findAll(User.class);
+                    if (userList.size() > 0) {
+                        db.deleteAll(User.class);//删除以前的用户信息
+
+                    }
                     db.save(user);
+
+                    Intent intent = new Intent();
+                    intent.setClass(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                 }
             }
 

@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.melon.mobileoffice.R;
 
@@ -16,25 +18,16 @@ public class MsgDetailActivity extends AppCompatActivity {
         setContentView(R.layout.msg_detail);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.msg_detail_toolbar);
+        TextView title = (TextView) findViewById(R.id.msg_toolbar_title);
+        title.setText("消息");
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.btn_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MsgDetailActivity.this.finish();
+            }
+        });
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.msg_action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
 }
