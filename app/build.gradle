@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.githang:iconpagerindicator:1.2'
     compile 'com.yalantis:phoenix:1.2.3'
+    compile files('libs/afinal_0.5.1_bin.jar')
 }

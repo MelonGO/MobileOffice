@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.githang.viewpagerindicator.IconPagerAdapter;
 import com.githang.viewpagerindicator.IconTabPageIndicator;
+import com.melon.mobileoffice.info.InfoFragment;
 import com.melon.mobileoffice.message.MsgFragment;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         List<BaseFragment> fragments = new ArrayList<BaseFragment>();
 
         MsgFragment msgFragment = new MsgFragment();
-        msgFragment.setTitle("用户");
+        msgFragment.setTitle("消息");
         msgFragment.setIconId(R.drawable.tab_user_selector);
         fragments.add(msgFragment);
 
@@ -77,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
         contactFragment.setIconId(R.drawable.tab_user_selector);
         fragments.add(contactFragment);
 
-        BaseFragment recordFragment = new BaseFragment();
-        recordFragment.setTitle("记录");
-        recordFragment.setIconId(R.drawable.tab_record_selector);
-        fragments.add(recordFragment);
+        InfoFragment infoFragment = new InfoFragment();
+        infoFragment.setTitle("我的");
+        infoFragment.setIconId(R.drawable.tab_record_selector);
+        fragments.add(infoFragment);
 
         return fragments;
     }
