@@ -17,6 +17,7 @@ import com.melon.mobileoffice.contact.AddFriendActivity;
 import com.melon.mobileoffice.contact.ContactFragment;
 import com.melon.mobileoffice.info.InfoFragment;
 import com.melon.mobileoffice.message.MsgFragment;
+import com.melon.mobileoffice.work.WorkFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
         msgFragment.setIconId(R.drawable.tab_user_selector);
         fragments.add(msgFragment);
 
-        BaseFragment noteFragment = new BaseFragment();
-        noteFragment.setTitle("工作");
-        noteFragment.setIconId(R.drawable.tab_record_selector);
-        fragments.add(noteFragment);
+        WorkFragment workFragment = new WorkFragment();
+        workFragment.setTitle("工作");
+        workFragment.setIconId(R.drawable.tab_record_selector);
+        fragments.add(workFragment);
 
         ContactFragment contactFragment = new ContactFragment();
         contactFragment.setTitle("联系人");
