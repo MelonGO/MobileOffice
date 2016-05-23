@@ -5,8 +5,8 @@ import net.tsz.afinal.annotation.sqlite.Table;
 
 @Table(name = "user")
 public class User {
-
     @Id
+    private int id;
     private int userid;
     private String username;
     private String userpassword;
@@ -14,10 +14,16 @@ public class User {
     private int age;
     private String address;
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getUserid() {
         return userid;
     }
-
     public void setUserid(int id) {
         this.userid = id;
     }
@@ -25,7 +31,6 @@ public class User {
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String name) {
         this.username = name;
     }
@@ -33,7 +38,6 @@ public class User {
     public String getUserpassword() {
         return userpassword;
     }
-
     public void setUserpassword(String password) {
         this.userpassword = password;
     }
@@ -41,7 +45,6 @@ public class User {
     public String getGender() {
         return gender;
     }
-
     public void setGender(String gender) {
         this.gender = gender;
     }
@@ -49,7 +52,6 @@ public class User {
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
@@ -57,7 +59,6 @@ public class User {
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }

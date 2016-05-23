@@ -1,5 +1,6 @@
 package com.melon.mobileoffice;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,6 +13,8 @@ import android.view.MenuItem;
 
 import com.githang.viewpagerindicator.IconPagerAdapter;
 import com.githang.viewpagerindicator.IconTabPageIndicator;
+import com.melon.mobileoffice.contact.AddFriendActivity;
+import com.melon.mobileoffice.contact.ContactFragment;
 import com.melon.mobileoffice.info.InfoFragment;
 import com.melon.mobileoffice.message.MsgFragment;
 
@@ -44,7 +47,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.add_friend) {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, AddFriendActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.help_feedback) {
             return true;
         }
 
@@ -69,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(msgFragment);
 
         BaseFragment noteFragment = new BaseFragment();
-        noteFragment.setTitle("记事本");
+        noteFragment.setTitle("工作");
         noteFragment.setIconId(R.drawable.tab_record_selector);
         fragments.add(noteFragment);
 
-        BaseFragment contactFragment = new BaseFragment();
+        ContactFragment contactFragment = new ContactFragment();
         contactFragment.setTitle("联系人");
         contactFragment.setIconId(R.drawable.tab_user_selector);
         fragments.add(contactFragment);

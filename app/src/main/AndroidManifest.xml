@@ -20,6 +20,8 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".message.MsgDetailActivity"></activity>
         <activity android:name=".info.InfoDetailActivity"></activity>
+        <activity android:name=".contact.AddFriendActivity"></activity>
+        <activity android:name=".contact.FriendInfoActivity"></activity>
     </application>
 
 </manifest>

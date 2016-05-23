@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.melon.mobileoffice.model.Friend;
 import com.melon.mobileoffice.model.User;
 
 import net.tsz.afinal.FinalDb;
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void CheckUser(String name, String password) {
         FinalHttp fh = new FinalHttp();
-        fh.get("http://10.0.3.2:8080/MobileOfficeWeb/login?name=" + name + "&password=" + password, new AjaxCallBack() {
+        fh.get("http://10.0.3.2:8080/MobileOfficeWeb/login?type=login&name=" + name + "&password=" + password, new AjaxCallBack() {
 
             @Override
             public void onLoading(long count, long current) { //每1秒钟自动被回调一次
@@ -68,25 +69,65 @@ public class LoginActivity extends AppCompatActivity {
                     int age = Integer.parseInt(userInfo[4]);
                     String address = userInfo[5];
 
-                    User user = new User();
-                    user.setUserid(userid);
-                    user.setUsername(username);
-                    user.setUserpassword(userpassword);
-                    user.setGender(gender);
-                    user.setAge(age);
-                    user.setAddress(address);
+                    User new_user = new User();
+                    new_user.setUserid(userid);
+                    new_user.setUsername(username);
+                    new_user.setUserpassword(userpassword);
+                    new_user.setGender(gender);
+                    new_user.setAge(age);
+                    new_user.setAddress(address);
+                    db.save(new_user);
 
-                    List<User> userList = db.findAll(User.class);
-                    if (userList.size() > 0) {
-                        db.deleteAll(User.class);//删除以前的用户信息
-
-                    }
-                    db.save(user);
-
-                    Intent intent = new Intent();
-                    intent.setClass(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    GetFriendList(userid);
                 }
+            }
+
+            @Override
+            public void onFailure(Throwable t, int errorNo, String strMsg) {
+                super.onFailure(t, errorNo, strMsg);
+            }
+
+            @Override
+            public void onStart() {
+                //开始http请求的时候回调
+            }
+
+        });
+
+    }
+
+    private void GetFriendList(int userid) {
+        FinalHttp fh = new FinalHttp();
+        fh.get("http://10.0.3.2:8080/MobileOfficeWeb/login?type=friend&userid=" + userid, new AjaxCallBack() {
+
+            @Override
+            public void onLoading(long count, long current) { //每1秒钟自动被回调一次
+
+            }
+
+            @Override
+            public void onSuccess(Object o) {
+                super.onSuccess(o);
+
+                List friendList = db.findAll(Friend.class);
+                if (friendList.size() > 0) {
+                    db.deleteAll(Friend.class);
+                }
+
+                String message = o.toString();
+                if (!message.equals("")) {
+                    String[] infoList = message.split("&");
+                    for (int i = 0; i < infoList.length; i++) {
+                        String[] info = infoList[i].split(";");
+                        Friend friend = new Friend();
+                        friend.setFriendid(info[0]);
+                        friend.setFriendname(info[1]);
+                        db.save(friend);
+                    }
+                }
+                Intent intent = new Intent();
+                intent.setClass(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
 
             @Override

@@ -2,6 +2,9 @@
     <string name="app_name">MobileOffice</string>
     <string name="action_settings">Settings</string>
 
+    <string name="add_friend">添加朋友</string>
+    <string name="help_feedback">帮助和反馈</string>
+
     <string name="msg_content_1">好友1</string>
     <string name="msg_content_2">好友2</string>
     <string name="msg_content_3">好友3</string>

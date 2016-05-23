@@ -52,13 +52,11 @@ public class InfoDetailActivity extends AppCompatActivity {
     private void initUserInfo() {
 
         List<User> userList = db.findAll(User.class);
-        if (userList.size() == 1) {
-            User user = userList.get(0);
-            name.setText(user.getUsername() + "");
-            gender.setText(user.getGender() + "");
-            age.setText(user.getAge() + "");
-            address.setText(user.getAddress() + "");
-        }
+        User user = userList.get(userList.size() - 1);
+        name.setText(user.getUsername() + "");
+        gender.setText(user.getGender() + "");
+        age.setText(user.getAge() + "");
+        address.setText(user.getAddress() + "");
     }
 
 }
