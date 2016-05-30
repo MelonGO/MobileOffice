@@ -1,12 +1,16 @@
 package com.melon.mobileoffice.work;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.melon.mobileoffice.BaseFragment;
 import com.melon.mobileoffice.R;
+import com.melon.mobileoffice.work.customer.CustomerActivity;
 
 public class WorkFragment extends BaseFragment {
 
@@ -24,7 +28,32 @@ public class WorkFragment extends BaseFragment {
 
         gridview = (MyGridView) view.findViewById(R.id.gridview);
         gridview.setAdapter(new MyGridAdapter(this.getContext()));
-
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        Toast.makeText(getActivity(), "签到成功", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        Toast.makeText(getActivity(), "暂无公告", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), CustomerActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
         return view;
     }

@@ -1,11 +1,17 @@
 package com.melon.mobileoffice;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.melon.mobileoffice.model.Friend;
 import com.melon.mobileoffice.model.User;
@@ -14,6 +20,7 @@ import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
@@ -31,10 +38,36 @@ public class LoginActivity extends AppCompatActivity {
 
         db = FinalDb.create(this);
 
-        user_name = (EditText) findViewById(R.id.name_edit);
-        user_password = (EditText) findViewById(R.id.password_edit);
-        login_btn = (Button) findViewById(R.id.login_sure);
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.login_bg);
+        Bitmap bitmap = readBitMap(this, R.drawable.bg_image);
+        Drawable drawable = bitmapToDrawble(bitmap, this);
+        rl.setBackground(drawable);
 
+        user_name = (EditText) findViewById(R.id.name_edit);
+        user_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    user_name.setHint(null);
+                } else {
+                    user_name.setHint("用户名");
+                }
+            }
+        });
+
+        user_password = (EditText) findViewById(R.id.password_edit);
+        user_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    user_password.setHint(null);
+                } else {
+                    user_password.setHint("密码");
+                }
+            }
+        });
+
+        login_btn = (Button) findViewById(R.id.login_sure);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,6 +175,21 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    public static Bitmap readBitMap(Context context, int resId) {
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inPreferredConfig = Bitmap.Config.RGB_565;
+        opt.inPurgeable = true;
+        opt.inInputShareable = true;
+        //获取资源图片
+        InputStream is = context.getResources().openRawResource(resId);
+        return BitmapFactory.decodeStream(is, null, opt);
+    }
+
+    public static Drawable bitmapToDrawble(Bitmap bitmap, Context mcontext) {
+        Drawable drawable = new BitmapDrawable(mcontext.getResources(), bitmap);
+        return drawable;
     }
 
 }

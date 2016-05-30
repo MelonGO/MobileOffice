@@ -5,15 +5,10 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/add_friend"
-        android:orderInCategory="1"
-        android:title="@string/add_friend"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/help_feedback"
-        android:orderInCategory="2"
-        android:title="@string/help_feedback"
-        app:showAsAction="never" />
+        android:id="@+id/context_menu"
+        android:title="@string/action_settings"
+        android:icon="@drawable/add"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
 
 </menu>

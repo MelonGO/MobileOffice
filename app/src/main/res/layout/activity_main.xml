@@ -11,6 +11,15 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/DeepSkyBlue">
 
+        <TextView
+            android:id="@+id/main_toolbar_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center|left"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tool_bar_text_size" />
+
     </android.support.v7.widget.Toolbar>
 
     <com.githang.viewpagerindicator.IconTabPageIndicator
