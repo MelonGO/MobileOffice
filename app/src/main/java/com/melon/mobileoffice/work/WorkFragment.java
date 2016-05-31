@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.melon.mobileoffice.BaseFragment;
 import com.melon.mobileoffice.R;
 import com.melon.mobileoffice.work.customer.CustomerActivity;
+import com.melon.mobileoffice.work.employee.EmployeeActivity;
+import com.melon.mobileoffice.work.project.ProjectActivity;
 
 public class WorkFragment extends BaseFragment {
 
@@ -31,6 +33,7 @@ public class WorkFragment extends BaseFragment {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
                 switch (position) {
                     case 0:
                         Toast.makeText(getActivity(), "签到成功", Toast.LENGTH_SHORT).show();
@@ -39,13 +42,19 @@ public class WorkFragment extends BaseFragment {
                         Toast.makeText(getActivity(), "暂无公告", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
-                        Intent intent = new Intent();
+                        intent = new Intent();
                         intent.setClass(getActivity(), CustomerActivity.class);
                         startActivity(intent);
                         break;
                     case 3:
+                        intent = new Intent();
+                        intent.setClass(getActivity(), EmployeeActivity.class);
+                        startActivity(intent);
                         break;
                     case 4:
+                        intent = new Intent();
+                        intent.setClass(getActivity(), ProjectActivity.class);
+                        startActivity(intent);
                         break;
                     case 5:
                         break;
